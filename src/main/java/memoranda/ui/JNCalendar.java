@@ -36,6 +36,8 @@ public class JNCalendar extends JTable {
 	CalendarDate startPeriod = null;
 	CalendarDate endPeriod = null;
 	public JNCalendarCellRenderer renderer = new JNCalendarCellRenderer();
+	private static final int FIRST_DAY_OFFSET_FOR_SUNDAY = 1;
+	private static final int FIRST_DAY_OFFSET_FOR_MONDAY = 2;
 
 	public JNCalendar() {
 		this(CurrentDate.get());
@@ -168,13 +170,13 @@ public class JNCalendar extends JTable {
 	int daysInMonth;
 
 	void setCalendarParameters() {
-		int d = 1;
+		int d = FIRST_DAY_OFFSET_FOR_SUNDAY;
 
 		Calendar cal = _date.getCalendar();
 
 		if (Configuration.get("FIRST_DAY_OF_WEEK").equals("mon")) {
 			cal.setFirstDayOfWeek(Calendar.MONDAY);
-			d = 2;
+			d = FIRST_DAY_OFFSET_FOR_MONDAY;
 		} else
 			cal.setFirstDayOfWeek(Calendar.SUNDAY);
 
